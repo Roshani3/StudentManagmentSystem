@@ -1,0 +1,103 @@
+<div class="page-header">
+      <div>
+        <h2>Welcome, {{ currentUser?.username }}! 👋</h2>
+        <p>Here's an overview of the Student Management System</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon bg-primary">
+          <span class="material-icons">people</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ totalStudents }}</div>
+          <div class="stat-label">Total Students</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon bg-success">
+          <span class="material-icons">menu_book</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ uniqueCourses }}</div>
+          <div class="stat-label">Unique Courses</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon bg-warning">
+          <span class="material-icons">event</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ recentlyAdded }}</div>
+          <div class="stat-label">Added This Month</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon bg-secondary">
+          <span class="material-icons">show_chart</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ avgAge }}</div>
+          <div class="stat-label">Average Age</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="card">
+        <div class="section-header">
+          <h3><span class="material-icons">schedule</span> Recent Students</h3>
+          <a routerLink="/students" class="btn btn-sm btn-secondary">View All</a>
+        </div>
+        <div *ngIf="loading" class="loading-state">
+          <div class="spinner-dark"></div> Loading...
+        </div>
+        <table *ngIf="!loading && recentStudents.length > 0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Course</th>
+              <th>Age</th>
+              <th>Joined</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of recentStudents">
+              <td>
+                <div class="student-name">
+                  <div class="avatar">{{ s.name.charAt(0) }}</div>
+                  {{ s.name }}
+                </div>
+              </td>
+              <td><span class="badge badge-primary">{{ s.course }}</span></td>
+              <td>{{ s.age }}</td>
+              <td>{{ s.createdDate | date:'mediumDate' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="empty-state" *ngIf="!loading && recentStudents.length === 0">
+          <span class="material-icons">inbox</span>
+          <p>No students found</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <h3><span class="material-icons">pie_chart</span> Courses Breakdown</h3>
+        </div>
+        <div *ngIf="!loading && courseBreakdown.length > 0">
+          <div class="course-bar" *ngFor="let c of courseBreakdown">
+            <div class="course-name">{{ c.course }}</div>
+            <div class="bar-track">
+              <div class="bar-fill" [style.width.%]="(c.count / totalStudents) * 100"></div>
+            </div>
+            <div class="course-count">{{ c.count }}</div>
+          </div>
+        </div>
+        <div class="empty-state" *ngIf="!loading && courseBreakdown.length === 0">
+          <span class="material-icons">bar_chart</span>
+          <p>No data available</p>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,23 @@
+<nav class="navbar">
+      <div class="navbar-brand">
+        <span class="material-icons">school</span>
+        <span>StudentMS</span>
+      </div>
+      <div class="navbar-links" *ngIf="isLoggedIn">
+        <a routerLink="/dashboard" routerLinkActive="active">
+          <span class="material-icons">dashboard</span> Dashboard
+        </a>
+        <a routerLink="/students" routerLinkActive="active">
+          <span class="material-icons">people</span> Students
+        </a>
+      </div>
+      <div class="navbar-user" *ngIf="isLoggedIn">
+        <span class="user-chip">
+          <span class="material-icons">account_circle</span>
+          {{ currentUser?.username }}
+        </span>
+        <button class="btn btn-sm btn-secondary" (click)="logout()">
+          <span class="material-icons" style="font-size:16px">logout</span> Logout
+        </button>
+      </div>
+    </nav>

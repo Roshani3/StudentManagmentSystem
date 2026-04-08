@@ -1,0 +1,58 @@
+.search-bar {
+      display: flex; gap: 12px; align-items: center;
+    }
+    .search-input {
+      flex: 1; position: relative;
+    }
+    .search-input .material-icons {
+      position: absolute; left: 12px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400); font-size: 18px; pointer-events: none;
+    }
+    .search-input .form-control { padding-left: 40px; margin-bottom: 0; }
+    .filter-select { width: 200px; flex-shrink: 0; margin-bottom: 0; }
+
+    .table-card { padding: 0; overflow: hidden; }
+    .table-responsive { overflow-x: auto; }
+    table { margin: 0; }
+    .table-footer {
+      padding: 10px 16px;
+      font-size: 12px;
+      color: var(--gray-400);
+      border-top: 1px solid var(--gray-100);
+      text-align: right;
+    }
+
+    .student-name { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff; font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .name { font-weight: 600; font-size: 14px; color: var(--gray-900); }
+
+    .action-btns { display: flex; gap: 6px; }
+
+    .loading-state {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--gray-400); padding: 40px; justify-content: center;
+    }
+    .spinner-dark {
+      width: 20px; height: 20px;
+      border: 3px solid var(--gray-200);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .required { color: var(--danger); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media(max-width:600px){
+      .search-bar { flex-direction: column; }
+      .filter-select { width: 100%; }
+      .form-row { grid-template-columns: 1fr; }
+    }

@@ -1,0 +1,75 @@
+<div class="auth-page">
+      <div class="auth-card">
+        <div class="auth-header">
+          <span class="material-icons auth-icon">school</span>
+          <h2>Student Management</h2>
+          <p>Sign in to your account</p>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          <span class="material-icons" style="font-size:16px;vertical-align:middle">error_outline</span>
+          {{ errorMessage }}
+        </div>
+        <div class="alert alert-success" *ngIf="successMessage">
+          {{ successMessage }}
+        </div>
+
+        <div *ngIf="!showRegister">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" [(ngModel)]="loginForm.username"
+                   placeholder="Enter username" [class.is-invalid]="submitted && !loginForm.username">
+            <div class="invalid-feedback" *ngIf="submitted && !loginForm.username">Username is required</div>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-wrapper">
+              <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                     [(ngModel)]="loginForm.password"
+                     placeholder="Enter password" [class.is-invalid]="submitted && !loginForm.password">
+              <button class="toggle-pass" type="button" (click)="showPassword = !showPassword">
+                <span class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</span>
+              </button>
+            </div>
+            <div class="invalid-feedback" *ngIf="submitted && !loginForm.password">Password is required</div>
+          </div>
+          <button class="btn btn-primary w-full" (click)="onLogin()" [disabled]="loading">
+            <span class="spinner" *ngIf="loading"></span>
+            <span class="material-icons" *ngIf="!loading" style="font-size:18px">login</span>
+            {{ loading ? 'Signing in...' : 'Sign In' }}
+          </button>
+          <p class="switch-mode">
+            Don't have an account?
+            <a href="#" (click)="$event.preventDefault(); switchMode(true)">Register</a>
+          </p>
+          <div class="demo-creds">
+            <span class="material-icons" style="font-size:14px;color:var(--gray-400)">info</span>
+         Demo: <strong>admin</strong> / <strong>Admin&#64;123</strong>
+          </div>
+        </div>
+
+        <div *ngIf="showRegister">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" [(ngModel)]="registerForm.username"
+                   placeholder="Choose a username" [class.is-invalid]="submitted && !registerForm.username">
+            <div class="invalid-feedback" *ngIf="submitted && !registerForm.username">Username is required</div>
+          </div>
+          <div class="form-group">
+            <label>Password <small>(min 6 characters)</small></label>
+            <input type="password" class="form-control" [(ngModel)]="registerForm.password"
+                   placeholder="Choose a password" [class.is-invalid]="submitted && registerForm.password.length < 6">
+            <div class="invalid-feedback" *ngIf="submitted && registerForm.password.length < 6">Min 6 characters required</div>
+          </div>
+          <button class="btn btn-primary w-full" (click)="onRegister()" [disabled]="loading">
+            <span class="spinner" *ngIf="loading"></span>
+            <span class="material-icons" *ngIf="!loading" style="font-size:18px">person_add</span>
+            {{ loading ? 'Creating account...' : 'Create Account' }}
+          </button>
+          <p class="switch-mode">
+            Already have an account?
+            <a href="#" (click)="$event.preventDefault(); switchMode(false)">Sign In</a>
+          </p>
+        </div>
+      </div>
+    </div>
