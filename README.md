@@ -93,13 +93,13 @@ Edit `StudentManagementSystem.Backend/appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=StudentManagementDB;Trusted_Connection=True;TrustServerCertificate=True;"
+    "DefaultConnection": "Server=.\\SQLEXPRESS;Database=StudentManagementDB;Trusted_Connection=True;TrustServerCertificate=True;"
   }
 }
 ```
 
 > For SQL Server with username/password:
-> `"Server=localhost;Database=StudentManagementDB;User Id=sa;Password=YourPass;TrustServerCertificate=True;"`
+> `"Server=.\\SQLEXPRESS;Database=StudentManagementDB;User Id=sa;Password=YourPass;TrustServerCertificate=True;"`
 
 ### 2. Restore Packages & Run Migrations
 
@@ -116,10 +116,10 @@ dotnet ef database update
 dotnet run
 ```
 
-The API will start at: **https://localhost:7001**
+The API will start at: **https://localhost:5002**
 
 ### 3. Access Swagger UI
-Open: [https://localhost:7001/swagger](https://localhost:7001/swagger)
+Open: [https://localhost:5002/swagger](https://localhost:5002/swagger)
 
 ---
 
